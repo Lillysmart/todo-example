@@ -7,6 +7,10 @@ const isHtmlElement = list instanceof HTMLElement
 if (!isHtmlElement){
     throw new Error (`"data=-list" attribute not found`)}
 
-list.innerHTML=
+
+    const preview =document.querySelector("li")
+    preview?.className='task'
+    preview.innerHTML=``
+list.appendChild
 
 
