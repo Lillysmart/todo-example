@@ -1,8 +1,15 @@
 // @ts-check
 
 import { state } from "./state.js";
-
-const addTaskToHtml=()=>{
+/**
+ * 
+ * @param {*} id 
+ */
+const addTaskToHtml=(id)=>{
+  const isExisting = document.querySelector(`[data-task]=${id}`)
+  if (isExisting) {
+    throw new Error ('Task with that Id already added')
+  }
 const list = document.querySelector("[data-list]")
 const isHtmlElement = list instanceof HTMLElement
 if (!isHtmlElement){
@@ -11,7 +18,7 @@ if (!isHtmlElement){
 
     const preview =document.createElement("li")
     preview.className='task'
-    preview.dataset.task
+    preview.dataset.task=id
     preview.innerHTML=/* Html */` 
         <label class="task__check">
           <input class="task__input" type="checkbox" disabled/>
@@ -34,10 +41,10 @@ if (!isHtmlElement){
     `
 list.appendChild(preview)}
 
-const updateHtml =()=>{
+const updateHtml =(id , changes)=>{
 
 }
-console.log (addTaskToHtml()
+console.log (addTaskToHtml('task')
 )
 addTaskToHtml()
 
