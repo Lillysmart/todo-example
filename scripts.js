@@ -44,6 +44,10 @@ list.appendChild(preview)}
 const updateHtml =(id , changes)=>{
 
 }
+const errorHandler =()=>{
+  document.body.innerHTML='Something is terribly wrong'
+}
+window.addEventListener("error", errorHandler)
 console.log (addTaskToHtml('task')
 )
 addTaskToHtml()
