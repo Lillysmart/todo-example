@@ -1,37 +1,59 @@
 // @ts-check
-
 import { state, Task } from "./state.js";
+
 
 /**
  *
  * @param {string} dataAttr
  *@param {string}[value]
+ *@returns {boolean}
+ */
+const doesHtmlExist = (dataAttr, value) => {
+  const selector = value 
+  ? `[data-${dataAttr}="${value}"]`
+  : `[data-${dataAttr}]`;
+  const element = document.querySelector(selector);
+
+  const isHtmlElement = element instanceof HTMLElement;
+ 
+  return isHtmlElement ;
+};
+
+ /**
+ *
+ * @param {string} dataAttr
+ *@param {string}[value]
  *@returns {HTMLElement}
  */
-const getHtml = (dataAttr, value) => {
-  const selector = value ? `data-${dataAttr}="${value}"` : `data-${dataAttr}`;
+ const getHtml = (dataAttr, value) => {
+  const selector = value 
+  ? `[data-${dataAttr}="${value}"]`
+  : `[data-${dataAttr}]`;
+
+    console.log("Selector:", selector);
   const element = document.querySelector(selector);
-  
+  console.log("Element:", element);
+
   const isHtmlElement = element instanceof HTMLElement;
   if (!isHtmlElement) {
-    throw new Error(`${selector} attrribute not found in Html`);
+    throw new Error(`${selector} attribute not found in Html`);
   }
+
   return element;
 };
+
 
 /**
  *
  * @param {*} id
  */
 const addTaskToHtml = (id) => {
-  const isExisting = document.querySelector(`[data-task="${id}"]`);
-  if (isExisting) {
-    throw new Error("Task with that Id already added");
-  }
-  const list = document.querySelector("[data-list]");
-  const isHtmlElement = list instanceof HTMLElement;
-  if (!isHtmlElement) {
-    throw new Error(`"data=-list" attribute not found`);
+
+  
+  const list =getHtml("list")
+
+  if (doesHtmlExist("task", id)){
+    throw new Error ("Task with that Id already exist")
   }
 
   const preview = document.createElement("li");
@@ -71,11 +93,7 @@ window.addEventListener("error", errorHandler);
  * @param {Partial<Pick<Task, 'completed' | 'due' | 'title' | 'urgency'>>} changes
  */
 const updateHtml = (id, changes) => {
-  const element = document.querySelector(`[data-task="${id}"]`);
-  const isHtmlElement = element instanceof HTMLElement;
-  if (!isHtmlElement) {
-    throw new Error("");
-  }
-};
+  //const element = document.querySelector(`[data-task="${id}"]`);
+  };
 addTaskToHtml("task");
 updateHtml("task", { title: "eat Lunch" });
