@@ -2,7 +2,7 @@
 
 import { state } from "./state.js";
 
-const addTaskToHtml=(id)=>{
+const addTaskToHtml=()=>{
 const list = document.querySelector("[data-list]")
 const isHtmlElement = list instanceof HTMLElement
 if (!isHtmlElement){
@@ -11,6 +11,7 @@ if (!isHtmlElement){
 
     const preview =document.createElement("li")
     preview.className='task'
+    preview.dataset.task
     preview.innerHTML=/* Html */` 
         <label class="task__check">
           <input class="task__input" type="checkbox" disabled/>
@@ -36,7 +37,8 @@ list.appendChild(preview)}
 const updateHtml =()=>{
 
 }
-
+console.log (addTaskToHtml()
+)
 addTaskToHtml()
 
 addTaskToHtml()
