@@ -25,7 +25,7 @@
  * @prop {Urgency | 'any'} urgency - Only shows tasks matching the value. `any` shows all tasks.
  * @prop {Sorting} sorting - Determines the order in which tasks are displayed.
  */
-
+export const Task={}
 /**
  * @typedef {object} State - All data associated with the specific instance of the app
  * @prop {Record<string, Task>} tasks - A list of all tasks that have been created
