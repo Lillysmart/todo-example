@@ -1,6 +1,6 @@
 //@ts-check
 
-import {getHtml  } from "./Modules/helpers.js";
+import {getHtml  } from "./helpers.js";
 
 const createAddingHtml =()=>{
 const element = getHtml({dataAttr:"adding"})
@@ -30,4 +30,8 @@ dialog.innerHTML=`<dialog class="overlay" open="open">
 element.appendChild(dialog)
 }
 
-createAddingHtml()
+export const createAdding =()=>{
+    createAddingHtml()
+}
+
+export default createAdding
