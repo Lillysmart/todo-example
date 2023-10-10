@@ -1,4 +1,4 @@
-// @ts-check
+/*// @ts-check
 import { state, Task } from "./Modules/state.js";
 import { addTaskToHtml } from "./Modules/tasks.js";
 
@@ -12,4 +12,4 @@ window.addEventListener("error", errorHandler);
   
   addTaskToHtml("task")
  updateHtml ("task", { title: "eat Lunch" });
-  
+  */
