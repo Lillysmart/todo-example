@@ -56,7 +56,7 @@ const addTaskToHtml = (id) => {
  * @param {Partial<Props>} changes
  */
 
-const updateHtml = (id, changes) => {
+const updateTaskHtml = (id, changes) => {
   const { completed, title } = changes;
   const element = getHtml({ dataAttr: "task", value: id });
 
@@ -100,7 +100,7 @@ export const createTask = (props) => {
 
   addTaskToHtml(id);
 
-  updateHtml(id, {
+  updateTaskHtml(id, {
     completed: false,
     ...props,
   });
@@ -113,16 +113,23 @@ export const createTask = (props) => {
     set id(newValue) {
       throw new Error("cannot directly change id ");
     },
+
     get completed() {
       return state.completed;
     },
-
+  
     set completed(newValue) {
       if (typeof newValue !== "boolean") {
         throw new Error('"completed" is not a boolean');
-      };
-      if (newValue === state.completed) {
-        return ;state.completed = newValue;
+      }
+      
+      if (newValue !== state.completed) {
+        state.completed = newValue;
+
+        updateTaskHtml(id, {
+          completed:newValue,
+      
+        });
       }
     },
 
@@ -138,33 +145,40 @@ export const createTask = (props) => {
       return state.title;
     },
 
-    set title (newValue){
-      if (! newValue || typeof newValue!== 'string' || newValue.trim=== ""){
-throw new Error ('"title" is required to be a non-empty string ')
-      }},
-
-get urgency (){
-  return state.urgency},
-
-     set urgency(newValue){
-      /**
-      * @type {Array<Urgency>}
-      */
- const valid =['high', 'low', 'medium']
- if (!valid.includes(newValue)){
-  throw new Error ("valid is required to be 'high', 'low', 'medium'")
- }
-      },
-    get due (){
-return state.due
-    },
-    set due (newValue){
-      if (!(newValue instanceof Date)){
-        throw new Error ("Due is requirred to be a date")
+    set title(newValue) {
+      if (!newValue || typeof newValue !== "string" || newValue.trim === "") {
+        throw new Error('"title" is required to be a non-empty string ');
       }
-      state.due=newValue
-    }
+      state.title= newValue
+
+      updateTaskHtml(id, {
+        title:newValue,
     
+      })
+    },
+
+    get urgency() {
+      return state.urgency;
+    },
+
+    set urgency(newValue) {
+      /**
+       * @type {Array<Urgency>}
+       */
+      const valid = ["high", "low", "medium"];
+      if (!valid.includes(newValue)) {
+        throw new Error("valid is required to be 'high', 'low', 'medium'");
+      }
+    },
+    get due() {
+      return state.due;
+    },
+    set due(newValue) {
+      if (!(newValue instanceof Date)) {
+        throw new Error("Due is requirred to be a date");
+      }
+      state.due = newValue;
+    },
   };
 };
 
