@@ -46,7 +46,7 @@ export const getHtml = (props) => {
  * Generate a unique ID using a combination of a timestamp and a random number.
  * @returns {string} A unique ID.
  */
-const createUniqueId = () => {
+ export const createUniqueId = () => {
   const array = [
     Math.round(Math.random() * 10000000000),
     new Date().getTime(),
