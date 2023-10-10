@@ -1,11 +1,11 @@
-
+//@ts-check
 /**
  *
  * @param {string} dataAttr
  *@param {string}[value]
  *@returns {boolean}
  */
- const doesHtmlExist = (dataAttr, value) => {
+ export const doesHtmlExist = (dataAttr, value) => {
     const selector = value 
     ? `[data-${dataAttr}="${value}"]`
     : `[data-${dataAttr}]`;
@@ -22,7 +22,7 @@
    *@param {string}[value]
    *@returns {HTMLElement}
    */
-   const getHtml = (dataAttr, value) => {
+   export const getHtml = (dataAttr, value) => {
     const selector = value 
     ? `[data-${dataAttr}="${value}"]`
     : `[data-${dataAttr}]`;

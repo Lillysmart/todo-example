@@ -1,0 +1,16 @@
+{
+  "name": "todo-example",
+  "version": "1.0.0",
+  "description": "<!-- omit in toc -->\r # ✅ Todo App",
+  "main": "example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1"
+  }
+}

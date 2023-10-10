@@ -1,22 +1,21 @@
-
-
+//@ts-check
+import { doesHtmlExist,getHtml} from "./helpers";
+import { Task } from "./state";
 /**
  *
- * @param {*} id
+ * @param {string} id
  */
 const addTaskToHtml = (id) => {
+  const list = getHtml("list");
 
-  
-    const list =getHtml("list")
-  
-    if (doesHtmlExist("task", id)){
-      throw new Error ("Task with that Id already exist")
-    }
-  
-    const preview = document.createElement("li");
-    preview.className = "task";
-    preview.dataset.task = id;
-    preview.innerHTML = /* Html */ ` 
+  if (doesHtmlExist("task", id)) {
+    throw new Error("Task with that Id already exist");
+  }
+
+  const preview = document.createElement("li");
+  preview.className = "task";
+  preview.dataset.task = id;
+  preview.innerHTML = /* Html */ ` 
           <label class="task__check">
             <input class="task__input" type="checkbox" disabled/>
           </label>
@@ -36,22 +35,20 @@ const addTaskToHtml = (id) => {
             </svg>
           </label>
       `;
-    list.appendChild(preview);
-  };
-  
-  const errorHandler = () => {
-    document.body.innerHTML = "Something is terribly wrong";
-  };
-  window.addEventListener("error", errorHandler);
-  
-  /**
-   *
-   * @param {string} id
-   * @param {Partial<Pick<Task, 'completed' | 'due' | 'title' | 'urgency'>>} changes
-   */
-  const updateHtml = (id, changes) => {
-    //const element = document.querySelector(`[data-task="${id}"]`);
-    };
-  //addTaskToHtml("task");
-  //("task", { title: "eat Lunch" });
-  
+  list.appendChild(preview);
+};
+
+/**
+ *
+ * @param {string} id
+ * @param {Partial<Pick<Task, 'completed' | 'due' | 'title' | 'urgency'>>} changes
+ */
+const updateHtml = (id, changes) => {
+  const element = document.querySelector(`[data-task="${id}"]`);
+  const isHtmlElements= element instanceof HTMLElement
+  if (!isHtmlElements){
+    throw new Error ('')
+  }
+};
+
+export const addTask = () => {};
