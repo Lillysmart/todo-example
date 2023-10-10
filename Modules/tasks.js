@@ -42,7 +42,7 @@ const addTaskToHtml = (id) => {
 /**
  *
  * @param {string} id
- * @param {Partial<Pick<Task, 'completed' | 'due' | 'title' | 'urgency'>>} changes
+ * @param {Partial<Props>} changes
  */
 
 const updateHtml = (id, changes) => {
@@ -70,16 +70,6 @@ const updateHtml = (id, changes) => {
 
 
 
-
-/**
- * Generate a unique ID using a combination of a timestamp and a random number.
- * @returns {string} A unique ID.
- */
-const createUniqueId=()=> {
-  const timestamp = Date.now().toString(36);
-  const randomString = Math.random().toString(36).substring(2, 15);
-  return `${timestamp}-${randomString}`;
-}
 
 /**
  * 
