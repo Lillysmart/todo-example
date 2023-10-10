@@ -144,21 +144,27 @@ throw new Error ('"title" is required to be a non-empty string ')
       }},
 
 get urgency (){
-  return state.title
-},
+  return state.urgency},
 
      set urgency(newValue){
       /**
       * @type {Array<Urgency>}
       */
  const valid =['high', 'low', 'medium']
- valid.includes(newValue)
+ if (!valid.includes(newValue)){
+  throw new Error ("valid is required to be 'high', 'low', 'medium'")
+ }
+      },
+    get due (){
+return state.due
+    },
+    set due (newValue){
+      if (!(newValue instanceof Date)){
+        throw new Error ("Due is requirred to be a date")
       }
+      state.due=newValue
+    }
     
-
-    due,
-    title,
-    urgency,
   };
 };
 
