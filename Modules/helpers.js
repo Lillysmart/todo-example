@@ -17,18 +17,23 @@
   };
   
    /**
-   *
-   * @param {string} dataAttr
-   *@param {string}[value]
+   *@param {object} props
+   * @param {string} props.dataAttr
+   *@param {string}[props.value]
+   * @param {HTMLElement}[props.target]
    *@returns {HTMLElement}
    */
-   export const getHtml = (dataAttr, value) => {
+   export const getHtml = (props) => {
+    const { dataAttr , value, target}= props
+
     const selector = value 
     ? `[data-${dataAttr}="${value}"]`
     : `[data-${dataAttr}]`;
   
+
+    const scope= target ||  document
       console.log("Selector:", selector);
-    const element = document.querySelector(selector);
+    const element = scope.querySelector(selector);
     console.log("Element:", element);
   
     const isHtmlElement = element instanceof HTMLElement;

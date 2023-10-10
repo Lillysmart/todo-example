@@ -6,7 +6,7 @@ import { Task } from "./state";
  * @param {string} id
  */
 const addTaskToHtml = (id) => {
-  const list = getHtml("list");
+  const list = getHtml({ dataAttr:"list"});
 
   if (doesHtmlExist("task", id)) {
     throw new Error("Task with that Id already exist");
@@ -17,17 +17,18 @@ const addTaskToHtml = (id) => {
   preview.dataset.task = id;
   preview.innerHTML = /* Html */ ` 
           <label class="task__check">
-            <input class="task__input" type="checkbox" disabled/>
+            <input class="task__input" data-checkbox type="checkbox" disabled/>
           </label>
-          <button class="task__title" disabled>
-          
+          <button class="task__title" data-title disabled>
           </button>
+
+          <buttonclass="task__check" data-delete style="display:none"> </button>
           <label class="task__check">
             <svg
               class="task__icon"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 96 960 960"
-              style="display:none"
+          
             >
               <path
                 d="M253 961q-40.212 0-67.606-27.1Q158 906.8 158 867V314h-58v-94h231v-48h297v48h232v94h-58v553q0 39.05-27.769 66.525Q746.463 961 707 961H253Zm454-647H253v553h454V314ZM354 789h77V390h-77v399Zm175 0h78V390h-78v399ZM253 314v553-553Z"
@@ -43,12 +44,55 @@ const addTaskToHtml = (id) => {
  * @param {string} id
  * @param {Partial<Pick<Task, 'completed' | 'due' | 'title' | 'urgency'>>} changes
  */
+
 const updateHtml = (id, changes) => {
-  const element = document.querySelector(`[data-task="${id}"]`);
-  const isHtmlElements= element instanceof HTMLElement
-  if (!isHtmlElements){
-    throw new Error ('')
+  const {completed, title}= changes 
+  const element = getHtml ({dataAttr:'task', value:id})
+  
+  const hasCompleted = completed !== undefined
+  //const hasDue = due !== undefined
+  const hasTitle = title !== undefined
+  //const hasUrgency = urgency !== undefined
+
+  if (hasCompleted){
+   const inner = getHtml({dataAttr:'checkbox', target:element})
+  if (!('checked' in inner)){throw new Error('Expected input element')
+
+  }
+   inner.checked = completed
+  }
+
+  if(hasTitle){
+   const inner = getHtml({dataAttr:'title', target:element})
+  inner.innerHTML = title
   }
 };
 
-export const addTask = () => {};
+
+
+
+/**
+ * Generate a unique ID using a combination of a timestamp and a random number.
+ * @returns {string} A unique ID.
+ */
+const createUniqueId=()=> {
+  const timestamp = Date.now().toString(36);
+  const randomString = Math.random().toString(36).substring(2, 15);
+  return `${timestamp}-${randomString}`;
+}
+
+/**
+ * 
+ * @param {Omit<Props, 'completed'>} props 
+ */
+export const createTask= (props) => {
+  const id = createUniqueId();
+  addTaskToHtml(id)
+
+  updateHtml(id, {
+    completed:false,
+    ...props,
+  })
+};
+
+export default createTask

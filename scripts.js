@@ -1,8 +1,14 @@
-/*// @ts-check
+// @ts-check
 import { state, Task } from "./Modules/state.js";
-import { addTaskToHtml } from "./Modules/tasks.js";
+import {addTask } from "./Modules/tasks.js";
 
+addTask({
+  title: "eat Lunch", 
+  urgency:'high',
+  due :null
+})
 
+/*
 const errorHandler = () => {
   document.body.innerHTML = "Something is terribly wrong";
 };
